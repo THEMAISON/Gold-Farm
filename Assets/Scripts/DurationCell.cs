@@ -15,7 +15,7 @@ public class DurationCell : MonoBehaviour
     [SerializeField] private Sprite[] conditionSprites;
 
     [SerializeField] private SpriteRenderer border;
-    [SerializeField] private SpriteRenderer over;
+    [SerializeField] private SpriteRenderer over;   
 
     private SpriteRenderer sr;
     private Vector3 posThis;
@@ -36,6 +36,7 @@ public class DurationCell : MonoBehaviour
 
     private void Update()
     {
+        //Если игрок достаточно близко к яме то может ее выкопать
         this.posThis = this.transform.position;
         this.posThis.y += 1;
 
@@ -61,7 +62,7 @@ public class DurationCell : MonoBehaviour
             ToCollectGold();
         }
     }
-
+    
     private void ChangeSprite(int index)
     {
         this.sr.sprite = conditionSprites[index];
@@ -120,10 +121,12 @@ public class DurationCell : MonoBehaviour
     }
     private void OnMouseOver()
     {
+        //Cursor.SetCursor(_newCursos, Vector2.zero, CursorMode.Auto);
         over.color = new Color(255, 255, 255, 255);
     }
     private void OnMouseExit()
     {
+        //Cursor.SetCursor(_newCursos, Vector2.zero, CursorMode.Auto);
         over.color = new Color(255, 255, 255, 0);
     }
     public void GetGold()
