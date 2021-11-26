@@ -1,59 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DurationCell : MonoBehaviour
 {
     [Header("Gold Options")]
-    [SerializeField] private Text _textCountGold;
+    [SerializeField] private CountAllGolds _text;
 
     [Header("Pit Options")]
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject _player;
     [Range(0.2f,5.0f)]
     [SerializeField] private float _distanceToInteraction;
-    [SerializeField] private Sprite[] conditionSprites;
+    [SerializeField] private Sprite[] _conditionSprites;
 
-    [SerializeField] private SpriteRenderer border;
-    [SerializeField] private SpriteRenderer over;   
+    [SerializeField] private SpriteRenderer _borderPitSprite;
+    [SerializeField] private SpriteRenderer _overPitSprite;
 
-    private SpriteRenderer sr;
-    private Vector3 posThis;
+    private SpriteRenderer _sr;
+    private Vector3 _posThis;
 
-    int condition = 3;
-    int goldFloor = -1;
+    private int _condition;
+    private int _goldFloor;
 
     bool isGold = false;
     bool isMiningPit = false;
 
-    static private int _allGolds = 0;
-
     void Start()
     {
-        this.sr = GetComponent<SpriteRenderer>();
-        goldFloor = Random.Range(0,4);
+        this._sr = GetComponent<SpriteRenderer>();
+        this._condition = 3;
+        this._goldFloor = Random.Range(0,4);
     }
 
     private void Update()
     {
-        //Если игрок достаточно близко к яме то может ее выкопать
-        this.posThis = this.transform.position;
-        this.posThis.y += 1;
 
-        if (Vector2.Distance(this.posThis, this.player.transform.position) <= this._distanceToInteraction)
+        this._posThis = GetPositionPlayer();
+
+        if (Vector2.Distance(this._posThis, this._player.transform.position) <= this._distanceToInteraction)
         {
-            if (isMiningPit == false)
+            if (this.isMiningPit == false)
             {
-                border.color = new Color(255, 255, 255, 255);
-                isMiningPit = true;
+                this._borderPitSprite.color = new Color(255, 255, 255, 255);
+                this.isMiningPit = true;
             }
         }
         else
         {
-            if (isMiningPit == true)
+            if (this.isMiningPit == true)
             {
-                isMiningPit = false;
-                border.color = new Color(255, 255, 255, 0);
+                this.isMiningPit = false;
+                this._borderPitSprite.color = new Color(255, 255, 255, 0);
             }
         }
 
@@ -62,78 +58,55 @@ public class DurationCell : MonoBehaviour
             ToCollectGold();
         }
     }
-    
-    private void ChangeSprite(int index)
+
+    private Vector3 GetPositionPlayer()
     {
-        this.sr.sprite = conditionSprites[index];
-    }
-    private bool CheckGold(int index)
-    {
-        if (goldFloor == index)
-        {
-            isGold = true;
-            return true;
-        }
-        return false;
-    }
-    private void ToCollectGold()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            GetGold();
-        }
+        this._posThis = this.transform.position;
+        this._posThis.y += 1;
+        return this._posThis;
     }
 
     public void OnMouseDown()
     {
-        if (isGold == false && isMiningPit==true)
+        if (isGold == false && isMiningPit == true)
         {
-            this.condition--;
-
-            if (condition == 2)
-            {
-                ChangeSprite(0);
-                if (CheckGold(2))
-                {
-                    Debug.Log("Gold is found!");
-                    GetComponentInChildren<SpawnGold>().GetComponent<SpawnGold>().Go();
-                }
-            }
-            else if (condition == 1)
-            {
-                ChangeSprite(1);
-                if (CheckGold(1))
-                {
-                    Debug.Log("Gold is found!");
-                    GetComponentInChildren<SpawnGold>().GetComponent<SpawnGold>().Go();
-                }
-            }
-            else if (condition == 0)
-            {
-                ChangeSprite(2);
-                if (CheckGold(0))
-                {
-                    Debug.Log("Gold is found!");
-                    GetComponentInChildren<SpawnGold>().GetComponent<SpawnGold>().Go();
-                }
-            }
+            this._condition--;
+            SetNewCondition(this._condition);
         }
     }
-    private void OnMouseOver()
+
+    private void SetNewCondition(int currentConditionIndex)
     {
-        //Cursor.SetCursor(_newCursos, Vector2.zero, CursorMode.Auto);
-        over.color = new Color(255, 255, 255, 255);
+        this._sr.sprite = _conditionSprites[currentConditionIndex];
+        if (_goldFloor == currentConditionIndex)
+        {
+            isGold = true;
+            Debug.Log("Gold is found!");
+            GetComponentInChildren<SpawnGold>().Go();
+        }
     }
-    private void OnMouseExit()
+
+    private void ToCollectGold()
     {
-        //Cursor.SetCursor(_newCursos, Vector2.zero, CursorMode.Auto);
-        over.color = new Color(255, 255, 255, 0);
+        if (Input.GetKeyDown(KeyCode.R)) GetGold();
     }
-    public void GetGold()
+
+    private void GetGold()
     {
         isGold = false;
         Debug.Log("You get up the item!");
-        _allGolds += GetComponentInChildren<SpawnGold>().GetComponent<SpawnGold>().DeleteAllGold();
-        _textCountGold.text = _allGolds.ToString();
+
+        int newGold = GetComponentInChildren<SpawnGold>().DeleteAllGold();
+        this._text.UpdateCountGoldsText(newGold);
+
+    }
+
+    private void OnMouseOver()
+    {
+        _overPitSprite.color = new Color(255, 255, 255, 255);
+    }
+    private void OnMouseExit()
+    {
+        _overPitSprite.color = new Color(255, 255, 255, 0);
     }
 }

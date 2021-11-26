@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnGold : MonoBehaviour
@@ -8,13 +6,13 @@ public class SpawnGold : MonoBehaviour
     [SerializeField] private int _maxCountGold;
     [Range(0.1f, 0.9f)]
     [SerializeField] private float _radiusToSpawn;
-    private int _countGold;
+    private int _countGoldToSpawn;
 
     public void Go()
     {
         this._radiusToSpawn = 1 - this._radiusToSpawn;
-        this._countGold = Random.Range(1, this._maxCountGold + 1);
-        this.Spawn(_countGold);
+        this._countGoldToSpawn = Random.Range(1, this._maxCountGold + 1);
+        this.Spawn(this._countGoldToSpawn);
     }
 
     public void Spawn(int count)
@@ -35,10 +33,8 @@ public class SpawnGold : MonoBehaviour
 
     public int DeleteAllGold()
     {
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-        return _countGold;
+        foreach (Transform child in transform) Destroy(child.gameObject);
+        return _countGoldToSpawn;
     }
+
 }
