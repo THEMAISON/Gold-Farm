@@ -8,27 +8,20 @@ public class SpawnGold : MonoBehaviour
     [SerializeField] private float _radiusToSpawn;
     private int _countGoldToSpawn;
 
-    public void Go()
+    private void Start()
     {
         this._radiusToSpawn = 1 - this._radiusToSpawn;
-        this._countGoldToSpawn = Random.Range(1, this._maxCountGold + 1);
-        this.Spawn(this._countGoldToSpawn);
     }
 
-    public void Spawn(int count)
+    public void Spawn()
     {
-        for (int i = 0; i < count; i++)
+        this._countGoldToSpawn = Random.Range(1, this._maxCountGold + 1);
+
+        for (int i = 0; i < this._countGoldToSpawn; i++)
         {
             var newGold = Instantiate(this._gold, this.RandPos(), Quaternion.identity);
             newGold.transform.parent = this.transform;
         }
-    }
-    private Vector2 RandPos()
-    {
-        float rX = Random.Range(transform.parent.position.x - _radiusToSpawn, transform.parent.position.x + _radiusToSpawn);
-        float rY = Random.Range(transform.parent.position.y - _radiusToSpawn, transform.parent.position.y + _radiusToSpawn);
-
-        return new Vector2(rX, rY);
     }
 
     public int DeleteAllGold()
@@ -37,4 +30,11 @@ public class SpawnGold : MonoBehaviour
         return _countGoldToSpawn;
     }
 
+    private Vector2 RandPos()
+    {
+        float rX = Random.Range(transform.parent.position.x - _radiusToSpawn, transform.parent.position.x + _radiusToSpawn);
+        float rY = Random.Range(transform.parent.position.y - _radiusToSpawn, transform.parent.position.y + _radiusToSpawn);
+
+        return new Vector2(rX, rY);
+    }
 }

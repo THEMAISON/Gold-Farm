@@ -3,6 +3,13 @@ using UnityEngine.UI;
 
 public class DurationCell : MonoBehaviour
 {
+    [Header("Message")]
+    [SerializeField] private MessageController _message;
+
+    [Header("Buttons")]
+    [SerializeField] private Button _digButton;
+    [SerializeField] private Button _getButton;
+
     [Header("Gold Options")]
     [SerializeField] private CountAllGolds _text;
 
@@ -21,8 +28,8 @@ public class DurationCell : MonoBehaviour
     private int _condition;
     private int _goldFloor;
 
-    bool isGold = false;
-    bool isMiningPit = false;
+    private bool _isGold = false;
+    private bool _isMiningPit = false;
 
     void Start()
     {
@@ -33,72 +40,82 @@ public class DurationCell : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(this._getButton.GetComponent<ButtonController>().CountActives);
 
-        this._posThis = GetPositionPlayer();
+        this._posThis = this.GetPositionPlayer();
 
         if (Vector2.Distance(this._posThis, this._player.transform.position) <= this._distanceToInteraction)
         {
-            if (this.isMiningPit == false)
+            if (this._isMiningPit == false)
             {
+                this._isMiningPit = true;
                 this._borderPitSprite.color = new Color(255, 255, 255, 255);
-                this.isMiningPit = true;
+
+                this._digButton.GetComponent<ButtonController>().CountActives++;
             }
-        }
-        else
-        {
-            if (this.isMiningPit == true)
-            {
-                this.isMiningPit = false;
-                this._borderPitSprite.color = new Color(255, 255, 255, 0);
-            }
+            if (_isGold == true && _isMiningPit == true && Input.GetKeyDown(KeyCode.R)) this.GetGold();
         }
 
-        if (isGold == true && isMiningPit == true)
+        else if (this._isMiningPit == true)
         {
-            ToCollectGold();
+            this._isMiningPit = false;
+
+            this._borderPitSprite.color = new Color(255, 255, 255, 0);
+            this._digButton.GetComponent<ButtonController>().CountActives--;
         }
     }
 
     private Vector3 GetPositionPlayer()
     {
-        this._posThis = this.transform.position;
-        this._posThis.y += 1;
-        return this._posThis;
+        Vector3 newPositiom = this.transform.position;
+        newPositiom.y += 1;
+        return newPositiom;
     }
 
     public void OnMouseDown()
     {
-        if (isGold == false && isMiningPit == true)
+        if (_isGold == false && _isMiningPit == true && this._condition > 0)
         {
             this._condition--;
-            SetNewCondition(this._condition);
+            this.SetNewCondition(this._condition);
         }
     }
 
     private void SetNewCondition(int currentConditionIndex)
     {
-        this._sr.sprite = _conditionSprites[currentConditionIndex];
-        if (_goldFloor == currentConditionIndex)
+        this._sr.sprite = this._conditionSprites[currentConditionIndex];
+        if (this._goldFloor == currentConditionIndex)
         {
-            isGold = true;
-            Debug.Log("Gold is found!");
-            GetComponentInChildren<SpawnGold>().Go();
+            this._isGold = true;
+
+            GetComponentInChildren<SpawnGold>().Spawn();
+
+            this._getButton.GetComponent<ButtonController>().CountActives++;
+
+            this._message.SetNewMessage("Нажмите R, чтобы собрать!");
+            this._message.OnMessage();
+
+            this._player.GetComponent<PlayerController>().IsMoving = false;
         }
     }
 
-    private void ToCollectGold()
+    public void GetGold()
     {
-        if (Input.GetKeyDown(KeyCode.R)) GetGold();
-    }
+        if (this._isGold == true)
+        {
+            this._isGold = false;
 
-    private void GetGold()
-    {
-        isGold = false;
-        Debug.Log("You get up the item!");
+            int newGold = GetComponentInChildren<SpawnGold>().DeleteAllGold();
+            this._text.UpdateCountGoldsText(newGold);
 
-        int newGold = GetComponentInChildren<SpawnGold>().DeleteAllGold();
-        this._text.UpdateCountGoldsText(newGold);
+            this._getButton.GetComponent<ButtonController>().CountActives--;
 
+            this._message.SetNewMessage("Золото собрано!");
+            this._message.OnMessage();
+            this._message.Invoke("OffMessage", 4);
+
+            this._player.GetComponent<PlayerController>().IsMoving = true;
+        }
     }
 
     private void OnMouseOver()

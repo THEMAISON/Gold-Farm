@@ -5,21 +5,22 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     [SerializeField] private Transform _target;
-    [Range(0.1f,10.0f)]
+    [Range(1.0f,15.0f)]
     [SerializeField] private float _ping;
 
     private Vector3 _targetPos;
 
     void FixedUpdate()
     {
-        this._targetPos = this._target.position;
-        if (this._targetPos.x < -0.25f) this._targetPos.x = -0.25f;
-        if (this._targetPos.x > 0.25f) this._targetPos.x = 0.25f;
-        if (_targetPos.y < -6.25f) this._targetPos.y = -5.25f;
-        if (this._targetPos.y > 6.25f) this._targetPos.y = 6.25f;
-
-        this._targetPos.z = -10.0f;
+        this._targetPos = this.UpdateTargetPosition();
 
         this.transform.position = Vector3.Lerp(this.transform.position, this._targetPos, this._ping/100);
     }
-}
+
+    private Vector3 UpdateTargetPosition()
+    {
+        Vector3 newPosition =this._target.position;
+        newPosition.z = -10.0f;
+        return newPosition;
+    }
+} 
