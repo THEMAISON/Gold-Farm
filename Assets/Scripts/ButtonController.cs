@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
+    [SerializeField] ShovelStatistics _ss;
+
     private Button _thisButton;
     private bool _isActive;
     private int _countActive;
@@ -22,12 +24,17 @@ public class ButtonController : MonoBehaviour
 
     private void Update()
     {
-        CheckerActiveButtons();
+        if (this.gameObject.name == "Dig" )
+        {
+            if(_ss.NumberOfUses == 0 && this._thisButton.interactable ==true) this._thisButton.interactable = false;
+            else if (_ss.NumberOfUses > 0) CheckerActiveButtons();
+        }
+        else if (this.gameObject.name == "Get") CheckerActiveButtons();
     }
 
     private void CheckerActiveButtons()
     {
-        if (this.CountActives > 0)
+        if (this._countActive > 0)
         {
             this._thisButton.interactable = true;
         }

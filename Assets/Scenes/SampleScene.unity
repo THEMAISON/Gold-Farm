@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 80517116}
   - component: {fileID: 80517118}
   - component: {fileID: 80517117}
+  - component: {fileID: 80517119}
   m_Layer: 5
   m_Name: Shovel Bar
   m_TagString: Untagged
@@ -203,6 +204,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80517115}
   m_CullTransparentMesh: 1
+--- !u!114 &80517119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80517115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27b95a69b3f52e4aa6ceac7acccdff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _imgShovel:
+  - {fileID: 1312795273}
+  - {fileID: 2143472978}
+  - {fileID: 926953855}
+  - {fileID: 1271492117}
+  - {fileID: 400853232}
 --- !u!1 &119099204
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,11 +409,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1 &400853230
@@ -984,11 +1007,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1 &574121085
@@ -1212,11 +1239,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1001 &918504330
@@ -1293,11 +1324,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1 &926953853
@@ -1449,11 +1484,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1 &1094102066
@@ -1955,6 +1994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae38c241129dd444d84d5cb1591c514d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ss: {fileID: 80517119}
 --- !u!1 &1271492115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2408,11 +2448,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1 &1516606205
@@ -2668,6 +2712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae38c241129dd444d84d5cb1591c514d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ss: {fileID: 80517119}
 --- !u!1001 &1526119484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2742,11 +2787,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1 &1605305182
@@ -3154,11 +3203,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!114 &1809663505 stripped
@@ -3333,11 +3386,15 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
 --- !u!1 &2002674461
@@ -3728,10 +3785,14 @@ PrefabInstance:
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _digButton
       value: 
-      objectReference: {fileID: 1198693719}
+      objectReference: {fileID: 1198693722}
     - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
       propertyPath: _getButton
       value: 
-      objectReference: {fileID: 1516606207}
+      objectReference: {fileID: 1516606210}
+    - target: {fileID: 8663568815032481991, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}
+      propertyPath: _shovelObj
+      value: 
+      objectReference: {fileID: 80517119}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1e464e9673ab74887653f21cd6a009, type: 3}

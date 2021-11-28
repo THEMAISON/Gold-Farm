@@ -7,8 +7,8 @@ public class DurationCell : MonoBehaviour
     [SerializeField] private MessageController _message;
 
     [Header("Buttons")]
-    [SerializeField] private Button _digButton;
-    [SerializeField] private Button _getButton;
+    [SerializeField] private ButtonController _digButton;
+    [SerializeField] private ButtonController _getButton;
 
     [Header("Gold Options")]
     [SerializeField] private CountAllGolds _text;
@@ -19,8 +19,12 @@ public class DurationCell : MonoBehaviour
     [SerializeField] private float _distanceToInteraction;
     [SerializeField] private Sprite[] _conditionSprites;
 
+    [Header("Sprite Renderers")]
     [SerializeField] private SpriteRenderer _borderPitSprite;
     [SerializeField] private SpriteRenderer _overPitSprite;
+
+    [Header("Shovel Options")]
+    [SerializeField] private ShovelStatistics _shovelObj;
 
     private SpriteRenderer _sr;
     private Vector3 _posThis;
@@ -40,8 +44,6 @@ public class DurationCell : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(this._getButton.GetComponent<ButtonController>().CountActives);
-
         this._posThis = this.GetPositionPlayer();
 
         if (Vector2.Distance(this._posThis, this._player.transform.position) <= this._distanceToInteraction)
@@ -51,7 +53,7 @@ public class DurationCell : MonoBehaviour
                 this._isMiningPit = true;
                 this._borderPitSprite.color = new Color(255, 255, 255, 255);
 
-                this._digButton.GetComponent<ButtonController>().CountActives++;
+                this._digButton.CountActives++;
             }
             if (_isGold == true && _isMiningPit == true && Input.GetKeyDown(KeyCode.R)) this.GetGold();
         }
@@ -61,7 +63,7 @@ public class DurationCell : MonoBehaviour
             this._isMiningPit = false;
 
             this._borderPitSprite.color = new Color(255, 255, 255, 0);
-            this._digButton.GetComponent<ButtonController>().CountActives--;
+            this._digButton.CountActives--;
         }
     }
 
@@ -74,9 +76,10 @@ public class DurationCell : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (_isGold == false && _isMiningPit == true && this._condition > 0)
+        if (_isGold == false && _isMiningPit == true && this._condition > 0 && this._shovelObj.NumberOfUses > 0)
         {
             this._condition--;
+            this._shovelObj.NumberOfUses--;
             this.SetNewCondition(this._condition);
         }
     }
@@ -90,7 +93,7 @@ public class DurationCell : MonoBehaviour
 
             GetComponentInChildren<SpawnGold>().Spawn();
 
-            this._getButton.GetComponent<ButtonController>().CountActives++;
+            this._getButton.CountActives++;
 
             this._message.SetNewMessage("Нажмите R, чтобы собрать!");
             this._message.OnMessage();
@@ -108,7 +111,7 @@ public class DurationCell : MonoBehaviour
             int newGold = GetComponentInChildren<SpawnGold>().DeleteAllGold();
             this._text.UpdateCountGoldsText(newGold);
 
-            this._getButton.GetComponent<ButtonController>().CountActives--;
+            this._getButton.CountActives--;
 
             this._message.SetNewMessage("Золото собрано!");
             this._message.OnMessage();
